@@ -1,0 +1,29 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<h1>SPA Page</h1>
+
+<button id="btn-download">Click to download</button>
+<button id="btn-download-new">Click to download in new window</button>
+<button id="btn-download-fetch">Click to process with fetch</button>
+
+<script>
+    document.querySelector("#btn-download").addEventListener("click", () => {
+        window.location.href = "/file/api1";
+    });
+
+    document.querySelector("#btn-download-new").addEventListener("click", () => {
+        window.open("/file/api1");
+    });
+
+    document.querySelector("#btn-download-fetch").addEventListener("click", async () => {
+        let data = await fetch("/file/api1")
+            .then(response => response.arrayBuffer());
+
+        // Do whatever you want with it
+        alert(data.byteLength);
+    });
+</script>
